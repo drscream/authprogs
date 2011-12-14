@@ -262,8 +262,19 @@ static int Validate(FILE* cfgFile, char* clientIp, char* clientCommand)
 		if (ipMatch)
 		{
 			StrShrinkSpaces(p_str);
-			if (0 == strcmp(p_str, clientCommand))
-				return 0;
+
+			strLen = strlen(p_str);
+
+			if ('*' == p_str[strLen - 1])
+			{
+				if (0 == strncmp(p_str, clientCommand, strLen - 1))
+					return 0;
+			}
+			else
+			{
+				if (0 == strcmp(p_str, clientCommand))
+					return 0;
+			}
 		}
 	}
 	
