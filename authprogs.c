@@ -267,6 +267,9 @@ static int Validate(FILE* cfgFile, char* clientIp, char* clientCommand)
 
 			if ('*' == p_str[strLen - 1])
 			{
+				if (NULL != StrFindFirstCharFromSet(p_str, ";{}|`()&"))
+					return ERR_NOT_VALID;
+
 				if (0 == strncmp(p_str, clientCommand, strLen - 1))
 					return 0;
 			}
