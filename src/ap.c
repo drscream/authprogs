@@ -937,7 +937,7 @@ static int parse_command (AP_CTX *ctx, char *line, BOOL *command_match)
 
 		if (ap_str_find_first_char_from_set (ctx->client_command, ";{}|`()&") != NULL)
 		{
-			ap_error ("(%s) Invalid characters in command\n", ctx->client_ip);
+			ap_error ("(%s) Invalid characters in command '%s', not allowed when using '*' matching\n", ctx->client_ip, ctx->client_command);
 			rc = AP_ERROR_NOT_VALID;
 
 			goto finish;

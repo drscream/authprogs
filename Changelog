@@ -1,2 +1,10 @@
+[0.9.100]
+	- added more detailed error message if invalid characters are used
+
 [0.9.99]
-	- initial version
+	- code rewrite
+	- added support for routing prefixes in configuration file (a.b.c.d/24)
+	- improved logging
+	- added support for windows
+	- added unit test framework
+	- added system test framework
