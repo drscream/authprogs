@@ -1043,23 +1043,23 @@ static int run_command (AP_CTX *ctx, int *exit_code)
 			break;
 		}
 
-		case 127:
-		{
-			ap_error ("(%s) Can not execute command, shell was executed, but the command inside the shell wasn't '%s'\n", ctx->client_ip, ctx->client_command);
-			rc = AP_ERROR_EXECUTE_COMMAND;
-
-			break;
-		}
-
 		default:
 		{
 #			if !defined (_WIN32)
 			rc_os = WEXITSTATUS (rc_os);
 #			endif
 
-			ap_allowed ("(%s) Successfully executed command '%s', exit code '%d'\n", ctx->client_ip, ctx->client_command, rc_os);
+			if (rc_os == 127)
+			{
+				ap_error ("(%s) Can not execute command, shell was executed, but the command inside the shell wasn't '%s'\n", ctx->client_ip, ctx->client_command);
+				rc = AP_ERROR_EXECUTE_COMMAND;
+			}
+			else
+			{
+				ap_allowed ("(%s) Successfully executed command '%s', exit code '%d'\n", ctx->client_ip, ctx->client_command, rc_os);
 
-			*exit_code = rc_os;
+				*exit_code = rc_os;
+			}
 
 			break;
 		}
