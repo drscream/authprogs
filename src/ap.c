@@ -1075,6 +1075,7 @@ int main (int argc, char *argv[])
 	AP_CTX			ctx;
 	BOOL			ip_command_match			= FALSE;
 	int				exit_code;
+	BOOL			exit_code_set				= FALSE;
 	
 	if (argv == NULL)
 	{
@@ -1088,12 +1089,7 @@ int main (int argc, char *argv[])
 
 	rc = init (&ctx, argc, argv);
 	if (rc != AP_NO_ERROR)
-	{
-		if (rc == AP_ERROR_VERSION || rc == AP_ERROR_HELP)
-		{
-			rc = AP_NO_ERROR;
-		}
-		
+	{	
 		goto finish;
 	}
 
@@ -1116,15 +1112,33 @@ int main (int argc, char *argv[])
 			goto finish;
 		}
 
-		rc = exit_code;
+		exit_code_set = TRUE;
 	}
 	else
 	{
 		ap_denied ("(%s) Is not allowed to execute command '%s'\n", ctx.client_ip, ctx.client_command);
-		fprintf (stderr, "(%s) Is not allowed to execute command '%s'\n", ctx.client_ip, ctx.client_command);
 	}
 	
 finish:
+	if (rc == AP_NO_ERROR)
+	{
+		if (exit_code_set == TRUE)
+		{
+			rc = exit_code;
+		}
+	}
+	else
+	{
+		if (rc == AP_ERROR_VERSION || rc == AP_ERROR_HELP)
+		{
+			rc = AP_NO_ERROR;
+		}
+		else
+		{
+			fprintf (stderr, "authprogs denied your access, please check the log on server\n");
+		}
+	}
+
 	uninit (&ctx);
 
 	return rc;

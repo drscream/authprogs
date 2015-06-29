@@ -1,3 +1,6 @@
+[0.9.102]
+	- if an error is encountered always display a message to the client
+
 [0.9.101]
 	- when executing command using the shell, if command can not be found then the return code
 must be retrieved using WEXITSTATUS
