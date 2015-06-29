@@ -1117,6 +1117,7 @@ int main (int argc, char *argv[])
 	else
 	{
 		ap_denied ("(%s) Is not allowed to execute command '%s'\n", ctx.client_ip, ctx.client_command);
+		fprintf (stderr, "(%s) Is not allowed to execute command '%s'\n", ctx.client_ip, ctx.client_command);
 	}
 	
 finish:

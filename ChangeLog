@@ -1,3 +1,6 @@
+[0.9.103]
+	- display a message to the client also when access is denied
+
 [0.9.102]
 	- if an error is encountered always display a message to the client
 
