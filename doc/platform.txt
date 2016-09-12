@@ -1,0 +1,13 @@
+Tested on:
+- Linux
+	* glibc 2.19
+- FreeBSD
+	* 9
+- Mac OS X
+	* 10.8.4
+- Windows
+	* 7
+	* 8
+	* 8.1
+
+Should work on other operating systems/versions.

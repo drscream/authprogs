@@ -1,9 +1,0 @@
-#ifndef _VERSION_H
-#define	_VERSION_H
-
-#define AUTHPROGS_MAJOR				0
-#define AUTHPROGS_MINOR				9
-#define AUTHPROGS_EXTERNAL_BUILD	14
-#define AUTHPROGS_INTERNAL_BUILD	0
-
-#endif /* _VERSION_H */
